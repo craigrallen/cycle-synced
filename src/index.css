@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-calm-50: #f0f0ff;
+  --color-calm-100: #e0e0ff;
+  --color-calm-200: #c4c4ff;
+  --color-calm-300: #9d9dff;
+  --color-calm-400: #7c7cff;
+  --color-calm-500: #6366f1;
+  --color-calm-600: #4f46e5;
+  --color-calm-700: #4338ca;
+  --color-calm-800: #3730a3;
+  --color-calm-900: #312e81;
+  --color-energy-50: #fff7ed;
+  --color-energy-100: #ffedd5;
+  --color-energy-200: #fed7aa;
+  --color-energy-300: #fdba74;
+  --color-energy-400: #fb923c;
+  --color-energy-500: #f97316;
+  --color-energy-600: #ea580c;
+  --color-energy-700: #c2410c;
+  --color-energy-800: #9a3412;
+  --color-energy-900: #7c2d12;
+}
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  @apply bg-gray-950 text-gray-100 min-h-screen;
+}
+
+/* Sine wave animation */
+@keyframes sine-drift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.sine-drift {
+  animation: sine-drift 8s linear infinite;
+}
