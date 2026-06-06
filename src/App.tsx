@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getCheckIns, getTasks, detectPatterns, generateSchedule, generateDemoData, type Task, type HourlyPattern, type Schedule } from './store';
 import SineWave from './components/SineWave';
 import EnergyLogger from './components/EnergyLogger';
@@ -13,10 +13,10 @@ type Tab = 'log' | 'patterns' | 'planner' | 'timer';
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('log');
-  const [patterns, setPatterns] = useState<HourlyPattern[]>([]);
-  const [schedule, setSchedule] = useState<Schedule[]>([]);
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [hasData, setHasData] = useState(false);
+  const [patterns, setPatterns] = useState<HourlyPattern[]>(() => detectPatterns(getCheckIns()));
+  const [schedule, setSchedule] = useState<Schedule[]>(() => generateSchedule(detectPatterns(getCheckIns())));
+  const [tasks, setTasks] = useState<Task[]>(getTasks);
+  const [hasData, setHasData] = useState(() => getCheckIns().length > 0);
 
   const refresh = () => {
     const data = getCheckIns();
@@ -26,8 +26,6 @@ export default function App() {
     setSchedule(generateSchedule(p));
     setTasks(getTasks());
   };
-
-  useEffect(refresh, []);
 
   const loadDemo = () => { generateDemoData(); refresh(); };
 
